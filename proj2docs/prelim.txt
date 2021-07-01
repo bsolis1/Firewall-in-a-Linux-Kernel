@@ -1,0 +1,46 @@
+Bryan Solis
+Prof. Lawrence Sebald
+Preliminary Design Project 2
+
+
+I have read the kernel manual about which functions and files were in-charged of dealing with the networking side of the system. I found some useful information that I could use in order to block certain ports. The folder “/net/socket.c “ contains most of the files that are responsible for the project. I am certain that most of my time, I  will be dealing with this file and the functions.
+
+Function in  socket.c that are important to me:
+
+bind() this function binds the socket to a corresponding address using this system call. I would create some test functions to test this functions and what I can do to block certain ports
+
+connect() this function is basically helping to connect the socket to the address of the server. This also seems to be a good function to start putting tests to see what type of information the parameter are getting. 
+
+accept() this function also seems to be helpfull because sometimes this function can block clients if some requirements are not met. If I could use something like this to block port in other part, It will be very usefull.
+
+
+In order to keep track of certain requirements like the ports that are blocked or the number of times certain port was tried to be accessed. I will use a linked list to keep track of the ports blocked and the number of times it was block, type of connection TCP/UDP. 
+
+struct portInformation{
+
+	unsigned int* ports;
+	int times;
+	unsigned char* types;
+	struct list_head list;
+	
+}
+
+
+For the second part of the project, we have to limit access for a file. I have not find the correct file where the permission are set. I will keep editing this file to see if I can find the correct file to see how i can change permission. So far i have an idea that i will create a struct node to keep track of the files that were made inmmutable and how many times they were accessed.
+
+struct fileInmutable{
+
+	unsigned char* files;
+	int times;
+	struct list_head list;
+		
+}
+
+
+I will keep adding variables inside if need it, but in general thats how it will look like. I will create a linked list to keep track of certain requirements of the project.
+
+NOTE
+
+I know we have to use some type of locking system to help the code give correct output and avoid problems. I was thinking i would use semmaphores and mutex since I used them in project1, i will have to modify them a little to make them work with this project.
+
+
